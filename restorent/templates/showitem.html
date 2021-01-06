@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Restaurant - Menu</title>
+ <style>
+       #a {
+         background-color: white;
+         color: black;
+         padding: 5px;
+         text-decoration: none;
+         border: 5px solid red;
+         }
+        #a:hover {
+           background-color: red;
+           color: white;
+
+         }
+        
+       #b {
+         background-color: yellow;
+         color: black;
+         padding: 5px;
+         text-decoration: none;
+         border: 5px solid yellow;
+         }
+        #b:hover {
+           background-color: yellow;
+           color: black;
+
+         }
+         
+</style>
+</head>
+
+<body>
+{% load static %}
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img src="{%  static 'Resto.png' %}" width="100" alt="" class="d-inline-block align-middle mr-3">
+
+        <span class="navbar-brand mb-0 h1">Restaurant</span>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/index">New Order</a>
+                <a class="nav-link" href="/show">Show Orders</a>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/additem">Add Item</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Show Menu</a>
+                    </div>
+                </li>
+            </div>
+        </div>
+        <h5 class="mt-3 mx-3 text-light" >{{userdata}}</h5>
+
+        <a href="/logout" id="b" class="button">logout</a>
+
+
+    </nav>
+
+    <form>
+        <div class="container my-5">
+            <div class="container-fluid my-3">
+                <h5>Menu</h5>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Item Price</th>
+                        <th scope="col">Item Category</th>
+                        <th scope="col">Item Option</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for menu in menu %}
+                      <tr>
+                        <th scope="row">#</th>
+                        <td>{{menu.dishname}}</td>
+                        <td>₹ {{menu.dishprice}}</td>
+                        <td>{{menu.dishtype}}</td>  
+                        <td>
+                            <a href="/deleteitem/{{menu.dishname}}" id="a" class="button">Delete</a>
+                        </td>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

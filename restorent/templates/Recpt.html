@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Restaurant</title>
+
+    <style>
+    button.print-button {
+  width: 100px;
+  height: 100px;
+}
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  border: solid 4px #333;
+}
+span.print-icon::after {
+  border-width: 2px;
+}
+
+button.print-button {
+  position: relative;
+  padding: 0;
+  border: 0;
+  
+  border: none;
+  background: transparent;
+}
+
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+span.print-icon {
+  position: relative;
+  display: inline-block;  
+  padding: 0;
+  margin-top: 20%;
+
+  width: 60%;
+  height: 35%;
+  background: #fff;
+  border-radius: 20% 20% 0 0;
+}
+
+span.print-icon::before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 12%;
+  right: 12%;
+  height: 110%;
+
+  transition: height .2s .15s;
+}
+
+span.print-icon::after {
+  content: " ";
+  position: absolute;
+  top: 55%;
+  left: 12%;
+  right: 12%;
+  height: 0%;
+  background: #fff;
+  background-repeat: no-repeat;
+  background-size: 70% 90%;
+  background-position: center;
+  background-image: linear-gradient(
+    to top,
+    #fff 0, #fff 14%,
+    #333 14%, #333 28%,
+    #fff 28%, #fff 42%,
+    #333 42%, #333 56%,
+    #fff 56%, #fff 70%,
+    #333 70%, #333 84%,
+    #fff 84%, #fff 100%
+  );
+
+  transition: height .2s, border-width 0s .2s, width 0s .2s;
+}
+
+button.print-button:hover {
+  cursor: pointer;
+}
+
+button.print-button:hover .print-icon::before {
+  height:0px;
+  transition: height .2s;
+}
+button.print-button:hover .print-icon::after {
+  height:120%;
+  transition: height .2s .15s, border-width 0s .16s;
+}
+
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .rtl table {
+            text-align: right;
+        }
+
+        .rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body>
+{% load static %}
+        <div class="container my-3">
+ 
+
+            <div class="invoice-box">
+                <table cellpadding="0" cellspacing="0" class="information">
+                    <tr class="top">
+                        <td colspan="4">
+                            <table>
+                                <tr>
+                                    <td class="title">
+                                        <img src="{%  static 'Rcicon.jpeg' %}"" style="width:100%; max-width:350px;">
+                                    </td>
+
+                                    <td style="text-align: right">
+                                        Invoice #:{{customer.id}}<br>
+                                        Issue Date: {{customer.time}}<br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr class="information">
+                        <td colspan="4">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Inorbit Capital<br>
+                                        Mumbai Road,<br>
+                                        Pune, 411001.
+                                    </td>
+
+                                    <td style="text-align: right">
+                                        Restaurant<br>
+                                        Restaurant Owner<br>
+                                        restaurant.owner@gmail.com
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th scope="col" colspan="2">Customer Name : {{customer.name}}</th>
+                          <th scope="col" colspan="2" style="text-align: right;">Customer Mobile No : {{customer.mobile}}</th>
+                        </tr>
+                      </thead>
+                    <thead>
+                      <tr class="table-secondary">
+                        <th scope="col"> </th>
+                        <th scope="col">Menu</th>
+                        <th scope="col" style="text-align: center">Quantity</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      {% for dish in dish %}
+                        <tr>
+                        <th scope="row">#</th>
+                        <td>{{dish.dname}}</td>
+                        <td style="text-align: center;">{{dish.dquantity}}</td>
+                        <td>₹ {{dish.damount}}</td>
+                        </tr>
+                      {%endfor%}
+                      
+                      <tr class="table-secondary">
+                        <th colspan="3" style="text-align: right">Total :</th>
+                        <td>₹ {{customer.amount}}</td>
+                      </tr>                     
+                    </tbody>
+                  </table>
+
+            </div>
+
+        </div>
+
+ <div class="d-sm-flex justify-content-sm-center">
+          
+      <button class="print-button" onclick="window.print()"><span class="print-icon"></span></button>
+    </div>             
+    
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+   
+
+</body>
+
+</html>

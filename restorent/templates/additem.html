@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Restaurant - Add Menu Item</title>
+     <style>
+       #b {
+         background-color: yellow;
+         color: black;
+         padding: 5px;
+         text-decoration: none;
+         border: 5px solid yellow;
+         }
+        #b:hover {
+           background-color: yellow;
+           color: black;
+
+         }
+         </style>
+</head>
+
+<body>
+{% load static %}
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img src="{%  static 'Resto.png' %}" width="100" alt="" class="d-inline-block align-middle mr-3">
+
+        <span class="navbar-brand mb-0 h1">Restaurant</span>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/index">New Order</a>
+                <a class="nav-link" href="/show">Show Orders</a>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/additem">Add Item</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/showitem">Show Menu</a>
+                    </div>
+                </li>
+            </div>
+        </div>
+        <h5 class="mt-3 mx-3 text-light" >{{userdata}}</h5>
+
+        <a href="/logout" id="b" class="button">logout</a>
+
+
+    </nav>
+
+    <form method="POST" action="/additem">
+    {% csrf_token %}
+        <div class="container my-5">
+            <h5 class="mt-3">Add Item</h5>
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for="validationDefault01">Item Name</label>
+                    <input type="tel" class="form-control" name="itemname" id="validationDefault01" placeholder="Sabji" maxlength="15"
+                        required>
+                </div>
+                <div class="form-group col-4">
+                    <label for="validationDefault01">Item Price</label>
+                    <input type="tel" class="form-control" name="itemprice" id="validationDefault01" placeholder="₹ 125"
+                         required>
+                </div>
+                <div class="dropdown form-group col-4">
+                    <label for="validationDefault01">Item Category</label>
+                    <input type="text" autocomplete="off" class="form-control" id="listdropdown" placeholder="Special ; Rice ; Dal ; Main Course"
+                        minlength="2" maxlength="10" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" name="itemtype" required>
+            
+                    <div class="dropdown-menu" aria-labelledby="listdropdown">
+                        <a class="dropdown-item" onclick="change('Starters')" href="#">Starters</a>
+                        <a class="dropdown-item" onclick="change('Dal')" href="#">Dal</a>
+                        <a class="dropdown-item" onclick="change('Rice')" href="#">Rice</a>
+                        <a class="dropdown-item" onclick="change('Main Course')" href="#">Main Course</a>
+                        <a class="dropdown-item" onclick="change('Indian Bread')" href="#">Indian Bread</a>
+                        <a class="dropdown-item" onclick="change('Restaurant Special')" href="#">Restaurant Special</a>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="d-sm-flex justify-content-sm-center">
+                <button type="submit" class="btn btn-success col-5 my-3">Save</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        <script>
+            function change(txt) {
+                document.getElementById("listdropdown").value = txt;
+            }
+        </script>
+</body>
+
+</html>
